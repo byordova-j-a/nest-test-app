@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+  backend:
+    build: backend/
+    depends_on:
+      postgres:
+        condition: service_healthy
+        restart: true
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/usr/src/backend/
+      - /usr/src/backend/node_modules
+    entrypoint: /backend/startup.sh
+  postgres:
+    hostname: postgres
+    image: postgres:14.8-alpine3.18
+    environment:
+      POSTGRES_DB: "postgresdb"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "1"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - postgresdb-data:/var/lib/postgresql/data
+    ports:
+     - "3306:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgresdb"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+  frontend:
+    build: frontend/
+    volumes:
+      - "./frontend:/home/frontend"
+    command: yarn dev
+    network_mode: host
+    depends_on:
+      - backend
+
+volumes:
+  postgresdb-data:

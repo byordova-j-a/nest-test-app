@@ -1,0 +1,55 @@
+@font-face {
+  font-family: Inter;
+  src: url(@/assets/fonts/Inter-Regular.ttf);
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: Inter;
+  src: url(@/assets/fonts/Inter-SemiBold.ttf);
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: Inter;
+  src: url(@/assets/fonts/Inter-Bold.ttf);
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+body,
+button,
+input {
+  font-family: Inter;
+  font-weight: 400;
+}
+
+#app {
+  height: 100vh;
+  padding: 55px;
+  box-sizing: border-box;
+  background-color: #d8e7fd;
+  cursor: url(@/assets/images/default-cursor.png), default;
+}
+
+p {
+  margin:0;
+}
+
+.default-cursor {
+  cursor: url(@/assets/images/default-cursor.png), default;
+}
+
+.default-button-cursor {
+  cursor: url(@/assets/images/default-button-cursor.png), default;
+}
+
+.pointer-cursor {
+  cursor: url(@/assets/images/pointer-cursor.png), pointer;
+}
+
